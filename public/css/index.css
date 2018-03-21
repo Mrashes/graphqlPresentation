@@ -1,0 +1,31 @@
+/*
+  Styles from this codepen:
+  https://codepen.io/official_naveen/pen/rgknI
+*/
+
+body {
+  width: 800px;
+  margin: 0 auto;
+  font-family: 'Open Sans', sans-serif;
+  background-position: 50% 0%;
+  /* background-color: black; */
+  background-repeat: no-repeat;
+}
+.container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.ghost {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
+.image {
+  height: 700px;
+}
+
+p {
+  color: #E64A19;
+}
