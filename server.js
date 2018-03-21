@@ -19,10 +19,6 @@ app.get('/', function (req, res){
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-// type Query {
-//   
-// }
-
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
   type Query {
@@ -30,11 +26,6 @@ const schema = buildSchema(`
     hello: String
   }
 `);
-
-// The root provides a resolver function for each API endpoint
-// const root = {
-
-// };
 
 var root = {
   hello: () => {
