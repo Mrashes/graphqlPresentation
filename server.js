@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
 
+const root = require('./root');
+const schema = buildSchema(require('./schema'))
+
 const port = process.env.PORT || 3000
 
 //bodyParser I cant use graph ql
@@ -15,30 +18,31 @@ app.get('/', function (req, res){
 	res.render('index', {imgurl: null, error: null});
 });
 
-
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-// Construct a schema, using GraphQL schema language
-const schema = buildSchema(`
-  type Query {
-    rollDice(numDice: Int!, numSides: Int): [Int],
-    hello: String
-  }
-`);
 
-var root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-  rollDice: function ({numDice, numSides}) {
+class RandomDie {
+  constructor(numSides) {
+    this.numSides = numSides;
+  }
+
+  rollOnce() {
+    return 1 + Math.floor(Math.random() * this.numSides);
+  }
+
+  roll({numRolls}) {
     var output = [];
-    for (var i = 0; i < numDice; i++) {
-      output.push(1 + Math.floor(Math.random() * (numSides || 6)));
+    for (var i = 0; i < numRolls; i++) {
+      output.push(this.rollOnce());
     }
     return output;
   }
-};
+}
+
+
+// // Construct a schema, using GraphQL schema language
+// const schema = buildSchema(importSchema);
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
