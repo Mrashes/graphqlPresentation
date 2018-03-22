@@ -21,28 +21,9 @@ app.get('/', function (req, res){
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-
-class RandomDie {
-  constructor(numSides) {
-    this.numSides = numSides;
-  }
-
-  rollOnce() {
-    return 1 + Math.floor(Math.random() * this.numSides);
-  }
-
-  roll({numRolls}) {
-    var output = [];
-    for (var i = 0; i < numRolls; i++) {
-      output.push(this.rollOnce());
-    }
-    return output;
-  }
-}
-
-
 // // Construct a schema, using GraphQL schema language
 // const schema = buildSchema(importSchema);
+
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
