@@ -74,4 +74,12 @@ module.exports = {
     fakeDatabase[id] = input;
     return new Message(id, input);
   },
+
+  deleteMessage: function ({id}) {
+    if (!fakeDatabase[id]) {
+      throw new Error('no message exists with id ' + id);
+    }
+    delete fakeDatabase[id]
+    return `Your message with the id ${id} has been deleted`
+  }
 };

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
 const { buildSchema } = require('graphql');
 
-const root = require('./root')(graphqlData);
+const root = require('./root');
 const schema = buildSchema(require('./schema'))
 
 const port = process.env.PORT || 3000

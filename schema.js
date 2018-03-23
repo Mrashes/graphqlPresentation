@@ -1,4 +1,6 @@
 module.exports = `
+  ${/*! Querying the database, no changes
+    */ ''}
   type Query {
     ${/*Hello World*/ ''}
     hello: String,
@@ -26,12 +28,15 @@ module.exports = `
     author: String
   }
 
+  ${/*! Changing the database*/ ''}
   type Mutation {
     createMessage(input: MessageInput): Message,
-    updateMessage(id: ID!, input: MessageInput): Message
+    updateMessage(id: ID!, input: MessageInput): Message,
+    deleteMessage(id: ID!): String
   }
 
   type RandomDie {
+    ${/*! means required*/ ''}
     numSides: Int!,
     rollOnce: Int!,
     roll(numRolls: Int!): [Int]
